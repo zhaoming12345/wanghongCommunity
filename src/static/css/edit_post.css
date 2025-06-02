@@ -1,0 +1,143 @@
+.edit-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.back-link svg {
+    margin-right: 0.5rem;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.back-link:hover {
+    color: #1a73e8;
+    background: rgba(26, 115, 232, 0.1);
+}
+
+.back-link:hover svg {
+    transform: translateX(-3px);
+}
+
+.edit-form {
+    margin-top: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+.form-group textarea {
+    width: 100%;
+    min-height: 300px;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+    line-height: 1.6;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.cancel-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #e0e0e0;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: #d0d0d0;
+}
+
+.submit-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #1a73e8;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #1557b0;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+}
+
+.error-message {
+    color: #e74c3c;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #fdecea;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .edit-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions button {
+        width: 100%;
+    }
+}

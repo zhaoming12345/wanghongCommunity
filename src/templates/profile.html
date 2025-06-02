@@ -1,0 +1,98 @@
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>个人主页 - {{ profile_user }}</title>
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <style>
+        .user-titles, .user-badges {
+            margin: 15px 0;
+        }
+
+        .titles-container, .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .title-badge {
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        .badge-item {
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>{{ profile_user }}的个人主页</h1>
+            {% if titles %}
+                <div class="user-titles">
+                    <h3>头衔</h3>
+                    <div class="titles-container">
+                        {% for title in titles %}
+                            <span class="title-badge">{{ title }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            {% if badges %}
+                <div class="user-badges">
+                    <h3>徽章</h3>
+                    <div class="badges-container">
+                        {% for badge in badges %}
+                            <span class="badge-item">{{ badge }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <p class="join-date">注册时间: {{ join_date }}</p>
+        </div>
+
+        <div class="profile-content">
+            <div class="section">
+                <h2>发布的帖子</h2>
+                <div class="posts-list">
+                    {% for post in posts %}
+                    <div class="post-item">
+                        <a href="/thread/{{ post.id }}" class="post-title">{{ post.title }}</a>
+                        <span class="post-time">{{ post.created_at }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>回复的帖子</h2>
+                <div class="replies-list">
+                    {% for reply in replies %}
+                    <div class="reply-item">
+                        <a href="/thread/{{ reply.post_id }}" class="post-title">{{ reply.post_title }}</a>
+                        <div class="reply-content">{{ reply.content }}</div>
+                        <span class="reply-time">{{ reply.created_at }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

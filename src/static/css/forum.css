@@ -1,0 +1,119 @@
+.post-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #5851DB, #833AB4);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.post-button:hover {
+    opacity: 0.9;
+}
+
+.pagination {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.pagination button:hover {
+    background: #f5f5f5;
+}
+
+#pageInput {
+    width: 50px;
+    padding: 5px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.forum-content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.posts-list {
+    margin-top: 20px;
+}
+
+.post-item {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.post-title {
+    margin: 0 0 10px 0;
+    font-size: 1.4em;
+    color: #333;
+}
+
+.post-content {
+    color: #666;
+    margin: 10px 0;
+    line-height: 1.6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.post-meta {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.post-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.post-link:hover .post-item {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid #5851DB;
+}
+
+.post-link:hover .post-title {
+    color: #5851DB;
+}
+
+.post-author {
+    color: #5851DB;
+    font-weight: 500;
+}
+
+.post-time, .post-replies {
+    display: inline-flex;
+    align-items: center;
+}
+
+.post-replies {
+    background: rgba(88, 81, 219, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: #5851DB;
+}

@@ -1,0 +1,431 @@
+.thread-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.back-link svg {
+    margin-right: 0.5rem;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.back-link:hover {
+    color: #1a73e8;
+    background: rgba(26, 115, 232, 0.1);
+}
+
+.back-link:hover svg {
+    transform: translateX(-3px);
+}
+
+.post-content {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
+}
+
+.post-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0 0 1rem 0;
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.post-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-wrap;
+}
+
+.replies h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reply-count {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.reply-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.reply-item {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.reply-item:hover {
+    background: #f0f2f5;
+}
+
+.reply-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.reply-meta .author {
+    color: #1a73e8;
+    font-weight: 500;
+}
+
+.reply-meta .time {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.reply-content {
+    color: #333;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.reply-form-container {
+    margin-top: 2rem;
+}
+
+.reply-button {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reply-button:hover {
+    background: #1557b0;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+}
+
+.reply-form {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.reply-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.reply-form textarea:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.cancel-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #e0e0e0;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: #d0d0d0;
+}
+
+.submit-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #1a73e8;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #1557b0;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+}
+@media (max-width: 768px) {
+    .thread-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .post-title {
+        font-size: 1.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}
+
+.reply-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.post-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.edit-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #2196F3;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.edit-button:hover {
+    background-color: #0b7dda;
+}
+
+.reply-actions .reply-button {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 12px;
+    color: #666;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.reply-actions .reply-button:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+    color: #333;
+}
+
+.reply-reference {
+    font-size: 13px;
+    color: #666;
+    background: #f5f5f5;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.reply-to-info {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.clear-reply-to {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 0 4px;
+    font-size: 16px;
+}
+
+.clear-reply-to:hover {
+    color: #666;
+}
+
+.reply-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.reply-item:last-child {
+    border-bottom: none;
+}
+
+.special-title {
+    color: #e74c3c;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-bottom: 2px solid #e74c3c;
+}
+
+.user-titles, .user-badges {
+    display: inline-flex;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.title-badge {
+    background-color: #e74c3c;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+}
+
+.badge-item {
+    background-color: #3498db;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+}
+
+/* 新增样式 */
+.post-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.edit-button, .delete-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.edit-button {
+    background-color: #3498db;
+    color: white;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #2980b9;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.confirm-dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.confirm-dialog-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.confirm-dialog h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.confirm-dialog-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.confirm-dialog-buttons button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.confirm-cancel {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.confirm-ok {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.confirm-cancel:hover {
+    background-color: #7f8c8d;
+}
+
+.confirm-ok:hover {
+    background-color: #c0392b;
+}

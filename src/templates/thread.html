@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>帖子详情 - wanghong社区</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/thread.css">
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <div class="thread-container">
+        <div class="header">
+            <a href="/forum" class="back-link">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                返回论坛
+            </a>
+        </div>
+
+        <article class="post-content">
+            <h1 class="post-title">{{ post.title }}</h1>
+            <div class="post-meta">
+                <span class="author">{{ post.username }}</span>
+                <span class="time">{{ post.created_at }}</span>
+            </div>
+            <div class="post-text">
+                {{ post.content }}
+            </div>
+            <div class="post-actions">
+                <a href="/edit_post/{{ post.id }}" class="edit-button">编辑帖子</a>
+            </div>
+        </article>
+
+        <section class="replies">
+            <h2>回复 <span class="reply-count">{{ replies|length }}</span></h2>
+            
+            <div class="reply-list">
+                {% for reply in replies %}
+                <div class="reply-item" data-reply-id="{{ reply.id }}">
+                    <div class="reply-meta">
+                        <span class="author">{{ reply.username }}</span>
+                        {% if reply.titles and reply.titles.strip() %}
+                            <div class="user-titles">
+                                {% for title in reply.titles.split(',') %}
+                                    <span class="title-badge">{{ title }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        {% if reply.badges %}
+                            <div class="user-badges">
+                                {% for badge in reply.badges.split(',') if badge %}
+                                    <span class="badge-item">{{ badge }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <span class="time">{{ reply.created_at }}</span>
+                    </div>
+                    <div class="reply-content">
+                        {% if reply.reply_to %}
+                            <div class="reply-reference">
+                                回复 @{{ reply.reply_to_username }}
+                            </div>
+                        {% endif %}
+                        {% if reply.title %}
+                            <div class="special-title">{{ reply.title }}</div>
+                        {% endif %}
+                        {{ reply.content }}
+                    </div>
+                    <div class="reply-actions">
+                        <button class="reply-button" onclick="showReplyForm('{{ reply.id }}', '{{ reply.username }}')">回复</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="reply-form-container">
+                <button class="reply-button" id="showReplyForm">回复</button>
+
+                {% if error %}
+                <div class="error-message">{{ error }}</div>
+                {% endif %}
+                <div id="replyError" class="error-message" style="display: none;"></div>
+
+                <form class="reply-form" id="replyForm" style="display: none;">
+                    <input type="hidden" name="reply_to" id="replyTo" value="">
+                    <div class="reply-to-info" id="replyToInfo" style="display: none;">
+                        回复给: <span id="replyToUsername"></span>
+                        <button type="button" class="clear-reply-to" onclick="clearReplyTo()">×</button>
+                    </div>
+                    <textarea name="content" placeholder="写下你的回复..." required></textarea>
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelReply">取消</button>
+                        <button type="submit" class="submit-btn">发布回复</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/js/thread.js"></script>
+
+</body>
+</html>

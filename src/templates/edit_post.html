@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>编辑帖子 - wanghong社区</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/edit_post.css">
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <div class="edit-container">
+        <div class="header">
+            <a href="/thread/{{ post.id }}" class="back-link">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                返回帖子
+            </a>
+        </div>
+
+        <form class="edit-form" method="POST" action="/edit_post/{{ post.id }}">
+            <div class="form-group">
+                <label for="title">标题</label>
+                <input type="text" id="title" name="title" value="{{ post.title }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="content">内容</label>
+                <textarea id="content" name="content" required>{{ post.content }}</textarea>
+            </div>
+
+            {% if error %}
+            <div class="error-message">{{ error }}</div>
+            {% endif %}
+
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" onclick="window.location.href='/thread/{{ post.id }}'">取消</button>
+                <button type="submit" class="submit-btn">保存</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="/static/js/edit_post.js"></script>
+</body>
+</html>

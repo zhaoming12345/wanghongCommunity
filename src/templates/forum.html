@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WANGHONG社区 - 论坛</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forum.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/thread.css') }}">
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <div class="forum-content">
+        <a href="/post" class="post-button">发帖</a>
+        <div class="posts-list">
+            {% for post in posts %}
+            <a href="/thread/{{ post.id }}" class="post-link">
+                <div class="post-item">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    <p class="post-content">{{ post.content[:200] + '...' if post.content|length > 200 else post.content }}</p>
+                    <div class="post-meta">
+                        <span class="post-author">{{ post.username }}</span>
+                        <span class="post-time">{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                        <span class="post-replies">回复: {{ post.reply_count }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="pagination">
+        <button onclick="goToPage(1)">首页</button>
+        <button onclick="goToPage({{ current_page-1 if current_page > 1 else 1 }})">上一页</button>
+        
+        {% set pages_to_show = [] %}
+        {% if total_pages <= 5 %}
+            {% for i in range(1, total_pages + 1) %}
+                {% set _ = pages_to_show.append(i) %}
+            {% endfor %}
+        {% elif current_page <= 2 %}
+            {% for i in range(1, 6) %}
+                {% set _ = pages_to_show.append(i) %}
+            {% endfor %}
+        {% elif current_page >= total_pages - 1 %}
+            {% for i in range(total_pages - 4, total_pages + 1) %}
+                {% set _ = pages_to_show.append(i) %}
+            {% endfor %}
+        {% else %}
+            {% for i in range(current_page - 2, current_page + 3) %}
+                {% set _ = pages_to_show.append(i) %}
+            {% endfor %}
+        {% endif %}
+
+        {% for page in pages_to_show %}
+            {% if page > 0 and page <= total_pages %}
+                <button 
+                    {% if page == current_page %}
+                        style="background: linear-gradient(45deg, #5851DB, #833AB4);"
+                    {% endif %}
+                    onclick="goToPage({{ page }})">
+                    {{ page }}
+                </button>
+            {% endif %}
+        {% endfor %}
+
+        <input type="number" id="pageInput" min="1" max="{{ total_pages }}" value="{{ current_page }}">
+        <button onclick="goToInputPage()">跳转</button>
+        <button onclick="goToPage({{ current_page+1 if current_page < total_pages else total_pages }})">下一页</button>
+        <button onclick="goToPage({{ total_pages }})">末页</button>
+    </div>
+
+    <script>
+        function goToPage(page) {
+            window.location.href = '/forum?page=' + page;
+        }
+        
+        function goToInputPage() {
+            const page = document.getElementById('pageInput').value;
+            if (page >= 1 && page <= {{ total_pages }}) {
+                goToPage(page);
+            }
+        }
+    </script>
+</body>
+</html>
