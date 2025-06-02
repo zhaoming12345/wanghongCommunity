@@ -28,7 +28,9 @@
                 {{ post.content }}
             </div>
             <div class="post-actions">
-                <a href="/edit_post/{{ post.id }}" class="edit-button">编辑帖子</a>
+                {% if is_author or has_edit_permission %}
+                    <a href="/edit_post/{{ post.id }}" class="edit-button">编辑帖子</a>
+                {% endif %}
             </div>
         </article>
 

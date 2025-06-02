@@ -9,13 +9,12 @@ app.secret_key = 'your_secret_key_here'
 def get_user_titles_and_badges(cursor, username):
     titles = []
     badges = []
-    
-    # 检查头衔
+
     cursor.execute("""
         SELECT 
             CASE WHEN title_volunteer THEN '志愿者' END as t1,
             CASE WHEN title_senior_volunteer THEN '高级志愿者' END as t2,
-            CASE WHEN title_support_staff THEN '支援管理人员' END as t3,
+            CASE WHEN title_support_staff THEN '志愿管理人员' END as t3,
             CASE WHEN title_tech_advisor THEN '技术顾问' END as t4,
             CASE WHEN title_admin THEN '管理人员' END as t5,
             CASE WHEN title_site_owner THEN '网站负责人' END as t6
@@ -23,8 +22,7 @@ def get_user_titles_and_badges(cursor, username):
     """, (username,))
     result = cursor.fetchone()
     titles = [t for t in result.values() if t]
-    
-    # 检查徽章
+
     cursor.execute("""
         SELECT 
             CASE WHEN badge_answer_expert THEN '回答小能手' END as b1,
@@ -221,6 +219,16 @@ def reply_post(post_id):
     finally:
         conn.close()
 
+def is_post_author(cursor, username, post_id):
+    cursor.execute("SELECT user_id FROM posts WHERE id = %s", (post_id,))
+    post = cursor.fetchone()
+    if not post:
+        return False
+        
+    cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
+    user = cursor.fetchone()
+    return user and user['id'] == post['user_id']
+
 @app.route('/edit_post/<int:post_id>', methods=['GET', 'POST'])
 def edit_post(post_id):
     if 'username' not in session:
@@ -230,6 +238,11 @@ def edit_post(post_id):
     with conn.cursor() as cursor:
         cursor.execute("SELECT * FROM posts WHERE id = %s", (post_id,))
         post = cursor.fetchone()
+
+        if not is_post_author(cursor, session['username'], post_id):
+            titles, _ = get_user_titles_and_badges(cursor, session['username'])
+            if not any(title in ['志愿管理人员', '技术顾问', '管理人员', '网站负责人'] for title in titles):
+                return "没有权限编辑此帖子", 403
 
         if request.method == 'POST':
             title = request.form.get('title')
@@ -270,10 +283,23 @@ def thread(thread_id):
         ORDER BY r.created_at DESC
     """, [thread_id])
     replies = cur.fetchall()
+
+    is_author = False
+    has_edit_permission = False
+    if 'username' in session:
+        is_author = is_post_author(cur, session['username'], thread_id)
+        titles, _ = get_user_titles_and_badges(cur, session['username'])
+        has_edit_permission = any(title in ['志愿管理人员', '技术顾问', '管理人员', '网站负责人'] for title in titles)
+    
     cur.close()
     conn.close()
 
-    return render_template('thread.html', post=post, replies=replies, username=session.get('username'))
+    return render_template('thread.html', 
+                         post=post, 
+                         replies=replies, 
+                         username=session.get('username'),
+                         is_post_author=is_author,
+                         has_edit_permission=has_edit_permission)
 
 @app.route('/profile/<username>')
 def profile(username):
